@@ -2,8 +2,8 @@ import torch
 import json
 import os
 
-from sr import utils, imsitu_scorer, imsitu_scorer_rare, imsitu_loader, imsitu_encoder
-from sr.model import top_down_baseline
+from utils import utils, imsitu_scorer, imsitu_loader, imsitu_encoder
+from models import top_down_baseline
 
 
 def train(model, train_loader, dev_loader, optimizer, scheduler, max_epoch, model_dir, encoder, gpu_mode, clip_norm, model_name, model_saving_name, eval_frequency=4):
