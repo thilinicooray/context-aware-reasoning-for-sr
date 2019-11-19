@@ -48,7 +48,6 @@ def main():
     parser.add_argument('--resume_training', action='store_true', help='Resume training from the model [resume_model]')
     parser.add_argument('--resume_model', type=str, default='', help='The model we resume')
     parser.add_argument('--evaluate', action='store_true', help='Only use the testing mode')
-    parser.add_argument('--evaluate_rare', action='store_true', help='Only use the testing mode')
     parser.add_argument('--test', action='store_true', help='Only use the testing mode')
     parser.add_argument('--dataset_folder', type=str, default='./imSitu', help='Location of annotations')
     parser.add_argument('--imgset_dir', type=str, default='./resized_256', help='Location of original images')
