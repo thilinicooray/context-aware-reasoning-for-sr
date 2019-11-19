@@ -6,7 +6,7 @@ from sr import utils, imsitu_scorer, imsitu_scorer_rare, imsitu_loader, imsitu_e
 from sr.model import top_down_baseline
 
 
-def train(model, train_loader, dev_loader, optimizer, scheduler, max_epoch, model_dir, encoder, gpu_mode, clip_norm, model_name, model_saving_name, eval_frequency=4000):
+def train(model, train_loader, dev_loader, optimizer, scheduler, max_epoch, model_dir, encoder, gpu_mode, clip_norm, model_name, model_saving_name, eval_frequency=4):
     model.train()
     train_loss = 0
     total_steps = 0
@@ -126,7 +126,7 @@ def eval(model, dev_loader, encoder, gpu_mode, write_to_file = False):
                 top5.add_point_noun(verb, role_predict, labels)
 
             del role_predict, img, verb, labels
-            #break
+            break
 
     return top1, top5, 0
 
