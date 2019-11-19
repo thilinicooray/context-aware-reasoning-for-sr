@@ -14,7 +14,7 @@ class Top_Down_Baseline(nn.Module):
 
     def forward(self, v_org, topk=5):
 
-        verb_pred = self.vgg_model(v_org) + self.tda_model(v_org, None)
+        verb_pred = self.vgg_model(v_org) + self.tda_model(v_org)
 
         role_pred_topk = None
 

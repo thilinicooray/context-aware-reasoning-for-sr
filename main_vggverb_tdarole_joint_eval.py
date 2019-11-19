@@ -18,7 +18,6 @@ def eval(model, dev_loader, encoder, gpu_mode, write_to_file = False):
         mx = len(dev_loader)
         for i, (img_id, img, verb, labels) in enumerate(dev_loader):
             print("{}/{} batches\r".format(i+1,mx)),
-            #print(img_id[0], encoder.verb2_role_dict[encoder.verb_list[verb[0]]])
 
             if gpu_mode >= 0:
                 img = torch.autograd.Variable(img.cuda())
@@ -35,7 +34,6 @@ def eval(model, dev_loader, encoder, gpu_mode, write_to_file = False):
             top5.add_point_eval5_log_sorted(img_id, verb_predict, verb, role_predict, labels)
 
             del verb_predict, img, verb
-            break
 
     return top1, top5, 0
 
