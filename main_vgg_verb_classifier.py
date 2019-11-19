@@ -6,20 +6,13 @@ from utils import utils, imsitu_scorer, imsitu_loader, imsitu_encoder
 from models import vgg_verb_classifier
 
 
-def train(model, train_loader, dev_loader, optimizer, scheduler, max_epoch, model_dir, encoder, gpu_mode, clip_norm, model_name, model_saving_name, eval_frequency=4000):
+def train(model, train_loader, dev_loader, optimizer, scheduler, max_epoch, model_dir, encoder, gpu_mode, clip_norm, model_name, model_saving_name, eval_frequency=4):
     model.train()
     train_loss = 0
     total_steps = 0
     print_freq = 400
     dev_score_list = []
 
-    '''if gpu_mode >= 0 :
-        ngpus = 2
-        device_array = [i for i in range(0,ngpus)]
-
-        pmodel = torch.nn.DataParallel(model, device_ids=device_array)
-    else:
-        pmodel = model'''
     pmodel = model
 
     top1 = imsitu_scorer.imsitu_scorer(encoder, 1, 3)
@@ -117,7 +110,7 @@ def eval(model, dev_loader, encoder, gpu_mode, write_to_file = False):
             top5.add_point_verb_only_eval(img_id, verb_predict, verb)
 
             del verb_predict, img, verb
-            #break
+            break
 
     return top1, top5, 0
 

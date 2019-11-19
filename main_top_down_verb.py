@@ -6,20 +6,14 @@ from utils import utils, imsitu_scorer, imsitu_loader, imsitu_encoder
 from models import top_down_verb, top_down_baseline_addemb
 
 
-def train(model, train_loader, dev_loader, optimizer, scheduler, max_epoch, model_dir, encoder, gpu_mode, clip_norm, model_name, model_saving_name, eval_frequency=4000):
+def train(model, train_loader, dev_loader, optimizer, scheduler, max_epoch, model_dir, encoder, gpu_mode, clip_norm, model_name, model_saving_name, eval_frequency=4):
     model.train()
     train_loss = 0
     total_steps = 0
     print_freq = 400
     dev_score_list = []
 
-    '''if gpu_mode >= 0 :
-        ngpus = 2
-        device_array = [i for i in range(0,ngpus)]
 
-        pmodel = torch.nn.DataParallel(model, device_ids=device_array)
-    else:
-        pmodel = model'''
     pmodel = model
 
     top1 = imsitu_scorer.imsitu_scorer(encoder, 1, 3)
@@ -27,19 +21,17 @@ def train(model, train_loader, dev_loader, optimizer, scheduler, max_epoch, mode
 
     for epoch in range(max_epoch):
 
-        for i, (img_id, img, verb_pred, verb) in enumerate(train_loader):
+        for i, (img_id, img, verb) in enumerate(train_loader):
             total_steps += 1
 
             if gpu_mode >= 0:
                 img = torch.autograd.Variable(img.cuda())
-                verb_pred = torch.autograd.Variable(verb_pred.cuda())
                 verb = torch.autograd.Variable(verb.cuda())
             else:
                 img = torch.autograd.Variable(img)
-                verb_pred = torch.autograd.Variable(verb_pred)
                 verb = torch.autograd.Variable(verb)
 
-            verb_predict = pmodel(img, verb_pred)
+            verb_predict = pmodel(img)
             loss = model.calculate_verb_loss(verb_predict, verb)
 
             loss.backward()
@@ -102,26 +94,24 @@ def eval(model, dev_loader, encoder, gpu_mode, write_to_file = False):
     top5 = imsitu_scorer.imsitu_scorer(encoder, 5, 3)
     with torch.no_grad():
 
-        for i, (img_id, img, verb_pred, verb) in enumerate(dev_loader):
+        for i, (img_id, img, verb) in enumerate(dev_loader):
 
             #print(img_id[0], encoder.verb2_role_dict[encoder.verb_list[verb[0]]])
 
             if gpu_mode >= 0:
                 img = torch.autograd.Variable(img.cuda())
-                verb_pred = torch.autograd.Variable(verb_pred.cuda())
                 verb = torch.autograd.Variable(verb.cuda())
             else:
                 img = torch.autograd.Variable(img)
-                verb_pred = torch.autograd.Variable(verb_pred)
                 verb = torch.autograd.Variable(verb)
 
-            verb_predict = model(img, verb_pred)
+            verb_predict = model(img)
 
             top1.add_point_verb_only_eval(img_id, verb_predict, verb)
             top5.add_point_verb_only_eval(img_id, verb_predict, verb)
 
             del verb_predict, img, verb
-            #break
+            break
 
     return top1, top5, 0
 
@@ -165,7 +155,7 @@ def main():
 
     encoder = imsitu_encoder.imsitu_encoder(train_set)
 
-    train_set = imsitu_loader.imsitu_loader_top_down_verb(imgset_folder, train_set, encoder,'train', encoder.train_transform)
+    train_set = imsitu_loader.imsitu_loader_verb(imgset_folder, train_set, encoder,'train', encoder.train_transform)
 
     #loading classifier part from pretrained agent and place models
     constructor = 'build_top_down_baseline'
@@ -178,11 +168,11 @@ def main():
     train_loader = torch.utils.data.DataLoader(train_set, batch_size=batch_size, shuffle=True, num_workers=n_worker)
 
     dev_set = json.load(open(dataset_folder + '/' + args.dev_file))
-    dev_set = imsitu_loader.imsitu_loader_top_down_verb(imgset_folder, dev_set, encoder, 'val', encoder.dev_transform)
+    dev_set = imsitu_loader.imsitu_loader_verb(imgset_folder, dev_set, encoder, 'val', encoder.dev_transform)
     dev_loader = torch.utils.data.DataLoader(dev_set, batch_size=batch_size, shuffle=True, num_workers=n_worker)
 
     test_set = json.load(open(dataset_folder + '/' + args.test_file))
-    test_set = imsitu_loader.imsitu_loader_top_down_verb(imgset_folder, test_set, encoder, 'test', encoder.dev_transform)
+    test_set = imsitu_loader.imsitu_loader_verb(imgset_folder, test_set, encoder, 'test', encoder.dev_transform)
     test_loader = torch.utils.data.DataLoader(test_set, batch_size=batch_size, shuffle=True, num_workers=n_worker)
 
     if not os.path.exists(args.output_dir):
