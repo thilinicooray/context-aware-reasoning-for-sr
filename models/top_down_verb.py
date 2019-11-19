@@ -6,9 +6,9 @@ import torch
 import torch.nn as nn
 import torchvision as tv
 
-from ..lib.attention import Attention
-from ..lib.classifier import SimpleClassifier
-from ..lib.fc import FCNet
+from lib.attention import Attention
+from lib.classifier import SimpleClassifier
+from lib.fc import FCNet
 
 
 

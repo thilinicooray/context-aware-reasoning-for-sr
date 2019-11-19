@@ -9,9 +9,9 @@ import torch.nn.functional as F
 import math
 import copy
 
-from ..lib.attention import Attention
-from ..lib.classifier import SimpleClassifier
-from ..lib.fc import FCNet
+from lib.attention import Attention
+from lib.classifier import SimpleClassifier
+from lib.fc import FCNet
 import torchvision as tv
 
 class vgg16_modified(nn.Module):

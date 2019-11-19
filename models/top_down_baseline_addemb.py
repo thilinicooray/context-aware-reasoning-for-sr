@@ -7,9 +7,9 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from ..lib.attention import Attention
-from ..lib.classifier import SimpleClassifier
-from ..lib.fc import FCNet
+from lib.attention import Attention
+from lib.classifier import SimpleClassifier
+from lib.fc import FCNet
 import torchvision as tv
 
 class vgg16_modified(nn.Module):

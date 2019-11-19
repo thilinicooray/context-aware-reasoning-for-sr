@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 from torch.nn.utils.weight_norm import weight_norm
-from ..lib.fc import FCNet
+from lib.fc import FCNet
 
 
 class Attention(nn.Module):
