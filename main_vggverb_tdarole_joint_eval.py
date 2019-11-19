@@ -82,7 +82,7 @@ def main():
 
     train_set = imsitu_loader.imsitu_loader(imgset_folder, train_set, encoder,'train', encoder.train_transform)
 
-    constructor = 'build_single_role_classifier'
+    constructor = 'build_vgg_verb_classifier'
     vgg_verb_model = getattr(vgg_verb_classifier, constructor)(len(encoder.verb_list))
 
     constructor = 'build_top_down_baseline'
