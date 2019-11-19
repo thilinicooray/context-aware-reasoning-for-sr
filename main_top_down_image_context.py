@@ -6,21 +6,21 @@ from utils import utils, imsitu_scorer, imsitu_loader, imsitu_encoder
 from models import top_down_image_contex, top_down_baseline
 
 
-def train(model, train_loader, dev_loader, optimizer, scheduler, max_epoch, model_dir, encoder, gpu_mode, clip_norm, model_name, model_saving_name, eval_frequency=4000):
+def train(model, train_loader, dev_loader, optimizer, scheduler, max_epoch, model_dir, encoder, gpu_mode, clip_norm, model_name, model_saving_name, eval_frequency=4):
     model.train()
     train_loss = 0
     total_steps = 0
     print_freq = 400
     dev_score_list = []
 
-    if gpu_mode >= 0 :
+    '''if gpu_mode >= 0 :
         ngpus = 2
         device_array = [i for i in range(0,ngpus)]
 
         pmodel = torch.nn.DataParallel(model, device_ids=device_array)
     else:
-        pmodel = model
-    #pmodel = model
+        pmodel = model'''
+    pmodel = model
 
     top1 = imsitu_scorer.imsitu_scorer(encoder, 1, 3)
     top5 = imsitu_scorer.imsitu_scorer(encoder, 5, 3)
@@ -115,15 +115,11 @@ def eval(model, dev_loader, encoder, gpu_mode, write_to_file = False):
 
             role_predict = model(img, verb)
 
-            if write_to_file:
-                top1.add_point_noun_log(img_id, verb, role_predict, labels)
-                top5.add_point_noun_log(img_id, verb, role_predict, labels)
-            else:
-                top1.add_point_noun(verb, role_predict, labels)
-                top5.add_point_noun(verb, role_predict, labels)
+            top1.add_point_noun(verb, role_predict, labels)
+            top5.add_point_noun(verb, role_predict, labels)
 
             del role_predict, img, verb, labels
-            #break
+            break
 
     return top1, top5, 0
 
@@ -225,7 +221,7 @@ def main():
     scheduler = torch.optim.lr_scheduler.ExponentialLR(optimizer, gamma=0.9)
 
     if args.evaluate:
-        top1, top5, val_loss = eval(model, dev_loader, encoder, args.gpuid, write_to_file = True)
+        top1, top5, val_loss = eval(model, dev_loader, encoder, args.gpuid)
 
         top1_avg = top1.get_average_results_nouns()
         top5_avg = top5.get_average_results_nouns()
@@ -239,7 +235,7 @@ def main():
                                                    utils.format_dict(top5_avg, '{:.2f}', '5-')))
 
     elif args.test:
-        top1, top5, val_loss = eval(model, test_loader, encoder, args.gpuid, write_to_file = True)
+        top1, top5, val_loss = eval(model, test_loader, encoder, args.gpuid)
 
         top1_avg = top1.get_average_results_nouns()
         top5_avg = top5.get_average_results_nouns()
