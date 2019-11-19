@@ -97,7 +97,9 @@ class Top_Down_Img_Recons(nn.Module):
 
         return role_label_pred, constructed_img, flattened_img
 
-    def calculate_loss(self, gt_verbs, role_label_pred, gt_labels):
+    def calculate_loss(self, gt_verbs, role_label_pred, gt_labels, constructed_img, flattened_img, beta=10):
+
+        l2_criterion = nn.MSELoss()
 
         batch_size = role_label_pred.size()[0]
         criterion = nn.CrossEntropyLoss(ignore_index=self.encoder.get_num_labels())
@@ -110,6 +112,9 @@ class Top_Down_Img_Recons(nn.Module):
         role_label_pred = role_label_pred.contiguous().view(-1, role_label_pred.size(-1))
 
         loss = criterion(role_label_pred, gt_label_turned.squeeze(1)) * 3
+
+        loss_recons = beta *l2_criterion(constructed_img, flattened_img)
+        return loss, loss_recons
 
         return loss
 
