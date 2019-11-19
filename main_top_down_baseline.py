@@ -118,12 +118,8 @@ def eval(model, dev_loader, encoder, gpu_mode, write_to_file = False):
 
             role_predict = model(img, verb)
 
-            if write_to_file:
-                top1.add_point_noun_log(img_id, verb, role_predict, labels)
-                top5.add_point_noun_log(img_id, verb, role_predict, labels)
-            else:
-                top1.add_point_noun(verb, role_predict, labels)
-                top5.add_point_noun(verb, role_predict, labels)
+            top1.add_point_noun(verb, role_predict, labels)
+            top5.add_point_noun(verb, role_predict, labels)
 
             del role_predict, img, verb, labels
             break
@@ -222,7 +218,7 @@ def main():
     scheduler = torch.optim.lr_scheduler.ExponentialLR(optimizer, gamma=0.9)
 
     if args.evaluate:
-        top1, top5, val_loss = eval(model, dev_loader, encoder, args.gpuid, write_to_file = True)
+        top1, top5, val_loss = eval(model, dev_loader, encoder, args.gpuid)
 
         top1_avg = top1.get_average_results_nouns()
         top5_avg = top5.get_average_results_nouns()
@@ -238,7 +234,7 @@ def main():
 
 
     elif args.test:
-        top1, top5, val_loss = eval(model, test_loader, encoder, args.gpuid, write_to_file = True)
+        top1, top5, val_loss = eval(model, test_loader, encoder, args.gpuid)
 
         top1_avg = top1.get_average_results_nouns()
         top5_avg = top5.get_average_results_nouns()
