@@ -1,4 +1,4 @@
-# context-aware-reasoning-for-sr
+# Attention-based Context Aware Reasoning for Situation Recognition
 
 ## Preparing the environment
 
