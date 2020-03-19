@@ -8,7 +8,7 @@
 
 ## Implementation Details
 
-This repository contains implementations for all methods we have used in our paper. We explain below what each file responsible for
+This repository contains implementations for all methods we have used in our paper. We explain below what each file is responsible for
 
 * main_ggnn_baseline.py - our implementation of https://arxiv.org/abs/1708.04320
 * main_revggverb_caqrole_eval.py - reasoning enhanced VGG based verb model joint with CAQ role model for entire situation prediction.
@@ -24,4 +24,4 @@ This repository contains implementations for all methods we have used in our pap
 * main_vggverb_tdarole_joint_eval.py - VGG verb model joint with TDA role model for entire situation prediction.
 
 All required arguments to be passed to each file are provided in each of their argument list respectively.
-Pretrained models can be found in ./pretrained_models folder
+
