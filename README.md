@@ -2,9 +2,9 @@
 
 ## Preparing the environment
 
-1. Our implementation is in PyTorch running on GPUs. Use the provided env/car4sr.yml to create a virtual environment using Anaconda.
+1. Our implementation is in PyTorch running on GPUs. Use the provided [car4sr.yml](env/car4sr.yml) to create a virtual environment using Anaconda.
 2. Download imSitu image set from http://imsitu.org (we use the resized image set)
-3. Annotations updated with top 2000 nouns are in imSitu folder.
+3. Annotations updated with top 2000 nouns are in [imSitu](imSitu) folder.
 
 ## Implementation Details
 
@@ -25,5 +25,5 @@ This repository contains implementations for all methods we have used in our pap
 
 All required arguments to be passed to each file are provided in each of their argument list respectively.
 
-For any enquiry, please contact me via <p><a href="mailto:thilini_cooray@mymail.sutd.edu.sg">thilini_cooray@mymail.sutd.edu.sg</a></p>
+For any enquiry, please contact me via <a href="mailto:thilini_cooray@mymail.sutd.edu.sg">thilini_cooray@mymail.sutd.edu.sg</a>
 
