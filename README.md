@@ -25,5 +25,5 @@ This repository contains implementations for all methods we have used in our pap
 
 All required arguments to be passed to each file are provided in each of their argument list respectively.
 
-For any enquiry, please contact me via <a href="mailto:thilini_cooray@mymail.sutd.edu.sg">thilini_cooray@mymail.sutd.edu.sg</a>
+For any enquiry, please contact me via <a href="mailto:thilini_cooray@mymail.sutd.edu.sg">thilini_cooray@mymail.sutd.edu.sg</a> or <a href="mailto:thilinicooray.ucsc@gmail.com">thilinicooray.ucsc@gmail.com</a>
 
