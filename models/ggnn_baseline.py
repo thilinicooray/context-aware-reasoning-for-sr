@@ -1,5 +1,6 @@
 '''
 PyTorch implementation of GGNN based SR : https://arxiv.org/abs/1708.04320
+GGNN implementation adapted from https://github.com/chingyaoc/ggnn.pytorch
 '''
 
 import torch
