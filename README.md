@@ -1,5 +1,17 @@
 # Attention-based Context Aware Reasoning for Situation Recognition [[PDF]](http://openaccess.thecvf.com/content_CVPR_2020/papers/Cooray_Attention-Based_Context_Aware_Reasoning_for_Situation_Recognition_CVPR_2020_paper.pdf)
 
+### Reference
+If you use our code, please cite our paper:
+```
+@InProceedings{Cooray_2020_CVPR,
+author = {Cooray, Thilini and Cheung, Ngai-Man and Lu, Wei},
+title = {Attention-Based Context Aware Reasoning for Situation Recognition},
+booktitle = {The IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+month = {June},
+year = {2020}
+}
+```
+
 ## Preparing the environment
 
 1. Our implementation is in PyTorch running on GPUs. Use the provided [car4sr.yml](env/car4sr.yml) to create a virtual environment using Anaconda.
