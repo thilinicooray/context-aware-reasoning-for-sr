@@ -1,4 +1,4 @@
-# Attention-based Context Aware Reasoning for Situation Recognition
+# Attention-based Context Aware Reasoning for Situation Recognition [[PDF]](http://openaccess.thecvf.com/content_CVPR_2020/papers/Cooray_Attention-Based_Context_Aware_Reasoning_for_Situation_Recognition_CVPR_2020_paper.pdf)
 
 ## Preparing the environment
 
