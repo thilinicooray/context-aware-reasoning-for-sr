@@ -8,7 +8,8 @@
 * Run main_vgg_verb_classifier.py to obtain the baseline VGG verb classifier
 * Run main_top_down_baseline_addemb.py to otain the modified TDA model for agent and place only semantic role predictions
 * Use the pretrained modified TDA model as input and train main_top_down_verb.py to obtain VQA based verb predictor.
-* All models converge around 30 epochs
+
+All models converge around 30 epochs
 
 # Inference
 
