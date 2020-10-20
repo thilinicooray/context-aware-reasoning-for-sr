@@ -23,7 +23,11 @@ This repository contains implementations for all methods we have used in our pap
 * main_vggverb_ggnnrole_joint_eval.py - VGG verb model joint with GGNN role model for entire situation prediction.
 * main_vggverb_tdarole_joint_eval.py - VGG verb model joint with TDA role model for entire situation prediction.
 
-All required arguments to be passed to each file are provided in each of their argument list respectively.
+All required arguments to be passed to each file are provided in each of their argument list respectively with default values set to reproduced results reported in the paper.
+
+##Training Steps
+
+Follow the steps indicated in [train_and_eval.md](train_and_eval.md) to train and inference on the proposed RE-VGG + CAQ model.
 
 ### Reference
 If you find this work is useful for your research, please cite our paper:
