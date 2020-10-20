@@ -25,9 +25,9 @@ This repository contains implementations for all methods we have used in our pap
 
 All required arguments to be passed to each file are provided in each of their argument list respectively with default values set to reproduced results reported in the paper.
 
-##Training Steps
+## Training Steps
 
-Follow the steps indicated in [train_and_eval.md](train_and_eval.md) to train and inference on the proposed RE-VGG + CAQ model.
+Follow the steps indicated in [training_and_eval.md](training_and_eval.md) to train and inference on the proposed RE-VGG + CAQ model.
 
 ### Reference
 If you find this work is useful for your research, please cite our paper:
